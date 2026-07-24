@@ -5,7 +5,7 @@
     xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
     xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
     xsi:type="TaskPaneApp">
-  <Id>8d261b0a-7b3e-4b6e-a34f-9e7f8a9e0f1d</Id>
+  <Id>3f9b87a1-5c2d-4e9f-9a1b-3d5c7f8e1a2b</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Your Name</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
@@ -17,22 +17,19 @@
   </Hosts>
   
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://your-username.github.io/your-repo/index.html" />
+    <SourceLocation DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/index.html" />
   </DefaultSettings>
   
   <Permissions>ReadWriteDocument</Permissions>
 
-  <!-- THIS SECTION ADDS IT TO THE RIBBON AUTOMATICALLY -->
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Hosts>
       <Host xsi:type="Workbook">
         <DesktopFormFactor>
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
-            <!-- Put it directly on the Home tab -->
             <OfficeTab id="TabHome">
               <Group id="CustomSearchGroup">
                 <Label resid="GroupLabel" />
-                <!-- The Ribbon Button -->
                 <Control xsi:type="Button" id="OpenSearchPaneButton">
                   <Label resid="ButtonLabel" />
                   <Supertip>
@@ -57,13 +54,12 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <!-- Microsoft strictly requires these 3 icon sizes for ribbon buttons. Upload 3 PNGs to your repo. -->
-        <bt:Image id="Icon16" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon16.png" />
-        <bt:Image id="Icon32" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon32.png" />
-        <bt:Image id="Icon80" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon80.png" />
+        <bt:Image id="Icon16" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/icon-16.png" />
+        <bt:Image id="Icon32" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/icon-32.png" />
+        <bt:Image id="Icon80" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/icon-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="TaskpaneUrl" DefaultValue="https://your-username.github.io/your-repo/index.html" />
+        <bt:Url id="TaskpaneUrl" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/index.html" />
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="Navigation" />
