@@ -1,52 +1,69 @@
-# 1. Self-Elevate if not Admin
-if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "Requesting Administrator privileges to set up the Network Share..."
-    $OneLiner = "irm https://liamlaidlaw.com/tl_bookkeeping_addin/install.ps1 | iex"
-    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"$OneLiner`"" -Verb RunAs
-    exit
-}
-
 $ManifestDir = "C:\ExcelCustomAddin"
 $ShareName = "ExcelCustomAddin"
 $ManifestUrl = "https://liamlaidlaw.com/tl_bookkeeping_addin/manifest.xml"
-
-Write-Host "Setting up official Shared Folder Catalog..."
-
-# 2. Create the base directory on C:
-if (-not (Test-Path $ManifestDir)) {
-    New-Item -ItemType Directory -Force -Path $ManifestDir | Out-Null
-}
-
-# 3. Setup the Network Share (Idempotently: only if it doesn't exist)
-if (-not (Get-SmbShare -Name $ShareName -ErrorAction SilentlyContinue)) {
-    New-SmbShare -Name $ShareName -Path $ManifestDir -ReadAccess "Everyone" | Out-Null
-}
-
-# 4. Download the manifest
-$LocalManifestPath = "$ManifestDir\manifest.xml"
-Invoke-WebRequest -Uri $ManifestUrl -OutFile $LocalManifestPath
-
-# 5. Clean up old Developer key if it exists
-$DevRegPath = "HKCU:\SOFTWARE\Microsoft\Office\16.0\WEF\Developer"
-if (Test-Path $DevRegPath) {
-    Remove-ItemProperty -Path $DevRegPath -Name "CustomSheetSearch" -ErrorAction SilentlyContinue
-}
-
-# 6. Add true UNC Network Share path to TrustedCatalogs
 $UNCPath = "\\localhost\$ShareName"
-$CatalogRegPath = "HKCU:\SOFTWARE\Microsoft\Office\16.0\WEF\TrustedCatalogs\CustomSheetSearch"
+
+Write-Host "Installing Custom Excel Add-in..."
+
+# ====================================================================
+# PHASE 1: RUN IN CURRENT USER CONTEXT
+# We MUST write the registry keys BEFORE elevating to Admin. 
+# If we elevate first, HKCU writes to the Administrator's registry, 
+# not the user's registry, so it never shows up in the user's Excel!
+# ====================================================================
+
+$CatalogRegPath = "HKCU:\SOFTWARE\Microsoft\Office\16.0\Wef\TrustedCatalogs\CustomSheetSearch"
 if (-not (Test-Path $CatalogRegPath)) {
     New-Item -Path $CatalogRegPath -Force | Out-Null
 }
 Set-ItemProperty -Path $CatalogRegPath -Name "Url" -Value $UNCPath -Type String
 Set-ItemProperty -Path $CatalogRegPath -Name "Flags" -Value 1 -Type DWord
 
-# 7. Clear Cache
+$DevRegPath = "HKCU:\SOFTWARE\Microsoft\Office\16.0\Wef\Developer"
+if (Test-Path $DevRegPath) {
+    Remove-ItemProperty -Path $DevRegPath -Name "CustomSheetSearch" -ErrorAction SilentlyContinue
+}
+
 $CachePath = "$env:LOCALAPPDATA\Microsoft\Office\16.0\Wef\Cache"
 if (Test-Path $CachePath) {
     Remove-Item -Path $CachePath -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-Write-Host "Installation Complete! A real Network Share ($UNCPath) was created and trusted."
-Write-Host "Please restart Excel and go to Home > Add-ins > More Add-ins > Shared Folder."
-Start-Sleep -Seconds 5
+Write-Host "Registry configured successfully for the current user."
+
+# ====================================================================
+# PHASE 2: RUN IN ADMIN CONTEXT
+# Now we evaluate if we need Admin rights to create the SMB Share on C:
+# ====================================================================
+
+$AdminScript = {
+    $ManifestDir = "C:\ExcelCustomAddin"
+    $ShareName = "ExcelCustomAddin"
+    $ManifestUrl = "https://liamlaidlaw.com/tl_bookkeeping_addin/manifest.xml"
+    
+    Write-Host "Creating Network Share..."
+    if (-not (Test-Path $ManifestDir)) {
+        New-Item -ItemType Directory -Force -Path $ManifestDir | Out-Null
+    }
+    if (-not (Get-SmbShare -Name $ShareName -ErrorAction SilentlyContinue)) {
+        New-SmbShare -Name $ShareName -Path $ManifestDir -ReadAccess "Everyone" | Out-Null
+    }
+    
+    Write-Host "Downloading Manifest..."
+    Invoke-WebRequest -Uri $ManifestUrl -OutFile "$ManifestDir\manifest.xml"
+    
+    Write-Host "Network Share created successfully! You can close this window."
+    Start-Sleep -Seconds 5
+}
+
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "Requesting Administrator privileges to set up the Network Share on C:..."
+    # Package the admin script into a base64 encoded command to run in the elevated prompt securely
+    $Encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($AdminScript.ToString()))
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -EncodedCommand $Encoded" -Verb RunAs
+} else {
+    # Already running as Admin, execute directly
+    Invoke-Command -ScriptBlock $AdminScript
+}
+
+Write-Host "Installation Complete! Please restart Excel and go to Home > Add-ins > More Add-ins > Shared Folder."
