@@ -38,7 +38,7 @@ if (Test-Path $CachePath) {
     Remove-Item -Path $CachePath -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-Write-Host "✅ Registry configured with exact Microsoft GUID structure."
+Write-Host "Registry configured with exact Microsoft GUID structure."
 
 # ====================================================================
 # PHASE 2: SMB SHARE SETUP (RUN IN ADMIN CONTEXT)
@@ -59,8 +59,9 @@ $AdminScript = {
     
     Write-Host "Downloading Manifest..."
     Invoke-WebRequest -Uri $ManifestUrl -OutFile "$ManifestDir\manifest.xml"
+    Unblock-File -Path "$ManifestDir\manifest.xml" -ErrorAction SilentlyContinue
     
-    Write-Host "✅ Network Share created successfully! You can close this window."
+    Write-Host "Network Share created successfully! You can close this window."
     Start-Sleep -Seconds 5
 }
 
