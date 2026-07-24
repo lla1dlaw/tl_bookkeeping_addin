@@ -17,7 +17,7 @@
   </Hosts>
   
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/index.html" />
+    <SourceLocation DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/index.html" />
   </DefaultSettings>
   
   <Permissions>ReadWriteDocument</Permissions>
@@ -26,6 +26,7 @@
     <Hosts>
       <Host xsi:type="Workbook">
         <DesktopFormFactor>
+          <FunctionFile resid="TaskpaneUrl" />
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="CustomSearchGroup">
@@ -54,12 +55,12 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon16" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/icon-16.png" />
-        <bt:Image id="Icon32" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/icon-32.png" />
-        <bt:Image id="Icon80" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/icon-80.png" />
+        <bt:Image id="Icon16" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon-16.png" />
+        <bt:Image id="Icon32" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon-32.png" />
+        <bt:Image id="Icon80" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="TaskpaneUrl" DefaultValue="https://lla1dlaw.github.io/tl_bookkeeping_addin/index.html" />
+        <bt:Url id="TaskpaneUrl" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/index.html" />
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="Navigation" />
