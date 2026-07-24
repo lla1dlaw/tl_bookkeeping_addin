@@ -12,6 +12,10 @@
   <DisplayName DefaultValue="Custom Sheet Search" />
   <Description DefaultValue="Search and navigate sheets fast."/>
   
+  <IconUrl DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon-80.png" />
+  <SupportUrl DefaultValue="https://liamlaidlaw.com" />
+  
   <Hosts>
     <Host Name="Workbook" />
   </Hosts>
@@ -31,6 +35,11 @@
             <OfficeTab id="TabHome">
               <Group id="CustomSearchGroup">
                 <Label resid="GroupLabel" />
+                <Icon>
+                  <bt:Image size="16" resid="Icon16" />
+                  <bt:Image size="32" resid="Icon32" />
+                  <bt:Image size="80" resid="Icon80" />
+                </Icon>
                 <Control xsi:type="Button" id="OpenSearchPaneButton">
                   <Label resid="ButtonLabel" />
                   <Supertip>
