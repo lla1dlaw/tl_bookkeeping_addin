@@ -11,22 +11,20 @@
 
 You can install this Add-in directly into your Excel application using the automated one-line commands below. You do not need to download any files manually.
 
-*(Note: Replace `your-username` and `your-repo` with your actual GitHub details. If you receive a security warning from Windows or your Mac, this is normal for internal scripts downloaded directly from the web.)*
-
 ### For Windows Users
 
 **Option A: Using PowerShell (Recommended)**
 1. Open the Start menu, type `PowerShell`, and press Enter.
 2. Paste the following command and press Enter:
    ```powershell
-   irm https://your-username.github.io/your-repo/install.ps1 | iex
+   irm https://liamlaidlaw.com/tl_bookkeeping_addin/install.ps1 | iex
    ```
 
 **Option B: Using Command Prompt (CMD)**
 1. Open the Start menu, type `cmd`, and press Enter.
 2. Paste the following command and press Enter:
    ```cmd
-   powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://your-username.github.io/your-repo/install.ps1 | iex"
+   powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://liamlaidlaw.com/tl_bookkeeping_addin/install.ps1 | iex"
    ```
 
 ### For Mac Users
@@ -34,7 +32,7 @@ You can install this Add-in directly into your Excel application using the autom
 1. Open the **Terminal** app (Press `Cmd + Space`, type `Terminal`, and press Enter).
 2. Paste the following command and press Enter:
    ```bash
-   curl -fsSL https://your-username.github.io/your-repo/install.sh | bash
+   curl -fsSL https://liamlaidlaw.com/tl_bookkeeping_addin/install.sh | bash
    ```
 
 ---
