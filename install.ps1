@@ -1,7 +1,7 @@
 $ManifestDir = "$env:LOCALAPPDATA\ExcelCustomAddin"
 $ManifestUrl = "https://liamlaidlaw.com/tl_bookkeeping_addin/manifest.xml"
 
-Write-Host "Installing Custom Excel Add-in (Production Mode)..."
+Write-Host "Installing Custom Excel Add-in (v1.1)..."
 
 # 1. Create directory if it doesn't exist
 if (-not (Test-Path $ManifestDir)) {
