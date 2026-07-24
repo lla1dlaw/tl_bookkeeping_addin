@@ -1,9 +1,5 @@
 # Excel Sheet Navigator Add-in
 
-A lightning-fast, custom Office Web Add-in for Excel that allows you to instantly search for and navigate to sheets within a workbook. 
-
-This tool is designed to handle extremely large workbooks effortlessly. It bypasses memory constraints by utilizing the native Office JavaScript API, making sheet navigation instantaneous.
-
 ## Features
 - **Search & Go:** Type a sheet name (partial or exact) and jump to it instantly.
 - **Search from Selected Cells:** Highlight one or more cells containing a sheet name and instantly navigate to that sheet.
@@ -17,7 +13,7 @@ You can install this Add-in directly into your Excel application using the autom
 
 *(Note: Replace `your-username` and `your-repo` with your actual GitHub details. If you receive a security warning from Windows or your Mac, this is normal for internal scripts downloaded directly from the web.)*
 
-### 🪟 For Windows Users
+### For Windows Users
 
 **Option A: Using PowerShell (Recommended)**
 1. Open the Start menu, type `PowerShell`, and press Enter.
@@ -33,7 +29,7 @@ You can install this Add-in directly into your Excel application using the autom
    powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://your-username.github.io/your-repo/install.ps1 | iex"
    ```
 
-### 🍎 For Mac Users
+### For Mac Users
 
 1. Open the **Terminal** app (Press `Cmd + Space`, type `Terminal`, and press Enter).
 2. Paste the following command and press Enter:
