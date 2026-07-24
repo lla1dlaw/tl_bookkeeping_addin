@@ -11,11 +11,12 @@
 
 You can install this Add-in directly into your Excel application using the automated one-line commands below. You do not need to download any files manually.
 
-### For Windows Users
+### 🪟 For Windows Users
 
 **Option A: Using PowerShell (Recommended)**
-1. Open the Start menu, type `PowerShell`, and press Enter.
-2. Paste the following command and press Enter:
+1. Open the Start menu, type `PowerShell`.
+2. **Right-click** Windows PowerShell and select **Run as Administrator**. (This is required to set up the Network Share).
+3. Paste the following command and press Enter:
    ```powershell
    irm https://liamlaidlaw.com/tl_bookkeeping_addin/install.ps1 | iex
    ```
