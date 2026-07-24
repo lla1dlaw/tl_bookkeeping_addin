@@ -39,14 +39,11 @@ You can install this Add-in directly into your Excel application using the autom
 
 ## How to Use
 
-1. Once the installation is complete, close and completely restart Excel.
+1. Once the installation is complete, close and **completely restart Excel**.
 2. Open any workbook.
-3. Go to the **Insert** tab on the ribbon.
-4. Click **My Add-ins** (or **Add-ins** depending on your Excel version).
-5. On Windows, look under the **Shared Folder** tab. On Mac, look under **Developer Add-ins**.
+3. Finding the Add-in depends on your version of Excel:
+   - **Modern Excel (Microsoft 365):** Go to the **Home** tab on the ribbon. Look toward the right side and click the **Add-ins** button. Click **More Add-ins** at the bottom of the menu.
+   - **Older Excel Versions:** Go to the **Insert** tab on the ribbon and click **My Add-ins**.
+4. In the dialog box that appears, click the **My Add-ins** tab at the top.
+5. Look for the **Developer Add-ins** section.
 6. Select **Custom Sheet Search** to open the side pane!
-
-## Troubleshooting
-
-- **I don't see the Add-in under "My Add-ins"**: Make sure you have completely closed all Excel windows and restarted the application after running the installation script.
-- **Excel on the Web**: The installation scripts above are for Desktop versions of Excel (Windows/Mac). To use this Add-in on Excel for the Web, go to **Insert > Add-ins**, click **Upload My Add-in**, and manually upload the `manifest.xml` file.
