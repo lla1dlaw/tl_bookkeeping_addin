@@ -3,7 +3,7 @@ $ShareName = "ExcelCustomAddin"
 $ManifestUrl = "https://liamlaidlaw.com/tl_bookkeeping_addin/manifest.xml"
 $UNCPath = "\\localhost\$ShareName"
 
-Write-Host "Installing Custom Excel Add-in..."
+Write-Host "Installing Custom Excel Add-in: v1.2"
 
 # ====================================================================
 # PHASE 1: RUN IN CURRENT USER CONTEXT
