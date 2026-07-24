@@ -2,6 +2,8 @@
 <OfficeApp 
     xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+    xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
     xsi:type="TaskPaneApp">
   <Id>b5a2b130-1234-4567-8901-123456789abc</Id>
   <Version>1.0.0.0</Version>
@@ -9,12 +11,68 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Custom Sheet Search" />
   <Description DefaultValue="Search and navigate sheets fast."/>
+  
   <Hosts>
     <Host Name="Workbook" />
   </Hosts>
+  
   <DefaultSettings>
-    <!-- CHANGE THIS URL TO YOUR GITHUB PAGES URL ONCE HOSTED -->
-    <SourceLocation DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/index.html" />
+    <SourceLocation DefaultValue="https://your-username.github.io/your-repo/index.html" />
   </DefaultSettings>
+  
   <Permissions>ReadWriteDocument</Permissions>
+
+  <!-- THIS SECTION ADDS IT TO THE RIBBON AUTOMATICALLY -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <DesktopFormFactor>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <!-- Put it directly on the Home tab -->
+            <OfficeTab id="TabHome">
+              <Group id="CustomSearchGroup">
+                <Label resid="GroupLabel" />
+                <!-- The Ribbon Button -->
+                <Control xsi:type="Button" id="OpenSearchPaneButton">
+                  <Label resid="ButtonLabel" />
+                  <Supertip>
+                    <Title resid="ButtonTitle" />
+                    <Description resid="ButtonToolTip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon16" />
+                    <bt:Image size="32" resid="Icon32" />
+                    <bt:Image size="80" resid="Icon80" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>SheetSearchPaneId</TaskpaneId>
+                    <SourceLocation resid="TaskpaneUrl" />
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <!-- Microsoft strictly requires these 3 icon sizes for ribbon buttons. Upload 3 PNGs to your repo. -->
+        <bt:Image id="Icon16" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon16.png" />
+        <bt:Image id="Icon32" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon32.png" />
+        <bt:Image id="Icon80" DefaultValue="https://liamlaidlaw.com/tl_bookkeeping_addin/icon80.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="TaskpaneUrl" DefaultValue="https://your-username.github.io/your-repo/index.html" />
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel" DefaultValue="Navigation" />
+        <bt:String id="ButtonLabel" DefaultValue="Sheet Search" />
+        <bt:String id="ButtonTitle" DefaultValue="Sheet Search Tool" />
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="ButtonToolTip" DefaultValue="Click to open the Custom Sheet Search Pane." />
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
 </OfficeApp>
